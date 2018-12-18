@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import ReactDom from 'react-dom';
-import {BrowserRouter, Router, Route, browserHistory, Switch} from 'react-router-dom';
+import {BrowserRouter, Route} from 'react-router-dom';
 import {Provider} from 'react-redux';
 import {syncHistoryWithStore} from 'react-router-redux';
 import {createStore, applyMiddleware, compose} from 'redux';
@@ -14,6 +14,7 @@ import App from './containers/app';
 import Index from './reducers/index';
 import List from './containers/list';
 import add from './containers/add';
+import speedTest from './containers/speedTest';
 
 require('./untils/ajax');
 
@@ -26,11 +27,12 @@ const store = createStore(Index, compose(
 const history = syncHistoryWithStore(createBrowserHistory(), store);
 ReactDom.render(
     <Provider store={store}>
-        <BrowserRouter history={history}>
+        <BrowserRouter>
             <div>
                 <Route exact path='/' component={App}/>
                 <Route path='/list' component={List}/>
                 <Route path='/add' component={add}/>
+                <Route path='/speedTest' component={speedTest}/>
             </div>
         </BrowserRouter>
     </Provider>,

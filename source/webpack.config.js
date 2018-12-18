@@ -30,6 +30,9 @@ module.exports={
         publicPath:'./'
     },
     devtool: '#source-map',
+    performance: {//文件过大提示  true 开启 false 关闭
+        hints: false
+    },
     module:{
         rules:[
             {
