@@ -6,6 +6,7 @@ import {connect} from 'react-redux';//连接store 和 ui 组件 组成新的组�
 import {speedTestHandle} from '../actions/speedTest';
 import {withRouter} from "react-router-dom";
 import SelectBox from '../components/public/selectBox';
+import SelectionShell from '../components/selectionShell';
 
 class speedTestMain extends React.Component {
     constructor(props){
@@ -18,7 +19,7 @@ class speedTestMain extends React.Component {
     componentDidMount() {
         //this.props.history.push('/list')
         let list=[];
-        for(let i=1;i<30;i++){
+        for(let i=1;i<1000;i++){
             list.push({
                 index:i,value:''
             })
@@ -34,7 +35,7 @@ class speedTestMain extends React.Component {
     }
 
     //select 改变事件
-    inputFun(i,value){
+    inputFun=(i,value)=>{
         let list=this.state.list;
         list[i].value=value;
         console.time('testForEach');
@@ -44,15 +45,23 @@ class speedTestMain extends React.Component {
             console.log(this.state.list);
             console.timeEnd('testForEach');
         })
-    }
+    };
 
-    creatSelectBox() {
+    /*creatSelectBox() {
         return this.state.list.map((item,i)=>{
             return (
                 <div key={i}>
                     <h3>{item.index}、这是第--{item.index}--个selectBox</h3>
-                    <SelectBox key={item.index} value={item.value} callback={this.inputFun.bind(this,i)} />
+                    <SelectBox key={item.index} value={item.value} callback={(value)=>{this.inputFun(i,value)}} />
                 </div>
+            );
+        })
+    }*/
+
+    creatSelectBox() {
+        return this.state.list.map((item,i)=>{
+            return (
+                <SelectionShell key={item.index} item={item} index={i} callback={this.inputFun} />
             );
         })
     }

@@ -2,7 +2,6 @@
  * Created by ex-wangxin on 2017/4/13.
  */
 import React from 'react';
-import {connect} from 'react-redux';
 require('../../../css/select-box.scss');
 /*import {siteAppicationHandle} from '../../../actions/helpLoan/qualExam/siteAppication';*/
 
@@ -31,18 +30,18 @@ class selectBox extends React.Component {
 
     }
 
-    optionClick(value,name){
+    optionClick=(value,name)=>{
         this.setState({
             show:false,
             value:value
         });
         this.props.callback(value);
-    }
+    };
     createOption(list){
         let optionList=[];
         for(var i in list){
             optionList.push(
-                <p key={i} onClick={this.optionClick.bind(this, list[i].value ,list[i].name)}>
+                <p key={i} onClick={()=>{this.optionClick(list[i].value ,list[i].name)}}>
                     {list[i].name}
                 </p>
             )
